@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Gestion des taches</h1>
+  
+    <!-- Formulaire d'ajout de tâche -->
+    <form (ngSubmit)="addTache()" class="mb-4">
+      <div class="mb-3">
+        <input [(ngModel)]="newTache.title" name="title" type="text" class="form-control" placeholder="Titre de la tâche" required>
+      </div>
+      <div class="mb-3">
+        <textarea [(ngModel)]="newTache.description" name="description" class="form-control" placeholder="Description de la tâche"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Ajouter une tâche</button>
+    </form>
+  
+    <!-- Liste des tâches non terminées -->
+    <h2>Tâches en cours</h2>
+    <ul class="list-group mb-4">
+      <li *ngFor="let tache of incompleteTaches" 
+          class="list-group-item d-flex justify-content-between align-items-center"
+          [ngClass]="{ 'completed': tache.completed }">
+        <div>
+          <h5>{{ tache.title }}</h5>
+          <p>{{ tache.description }}</p>
+        </div>
+        <button (click)="toggleComplete(tache)" class="btn btn-success">Terminer</button>
+      </li>
+    </ul>
+  
+    <!-- Liste des tâches terminées -->
+    <h2>Tâches terminées</h2>
+    <ul class="list-group">
+      <li *ngFor="let tache of completedTaches" 
+          class="list-group-item d-flex justify-content-between align-items-center completed-task"
+          [ngClass]="{ 'completed': tache.completed }">
+        <div>
+          <h5>{{ tache.title }}</h5>
+          <p>{{ tache.description }}</p>
+        </div>
+        <button (click)="toggleComplete(tache)" class="btn btn-warning">Annuler</button>
+      </li>
+    </ul>
+  </div>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
